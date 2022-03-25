@@ -12,7 +12,7 @@
             padding: 0;
         }
 
-        #vid {
+        video {
             position: relative;
             max-width: 100%;
             min-height: 100%;
@@ -27,20 +27,43 @@
             overflow: hidden;
         }
 
+        /* For desktops */
         @media only screen and (min-width:1200px) {
             .video-container {
                 max-height: 800px;
                 height: auto;
             }
-
-            #vid {
+            #desktop-vid {
                 object-fit: contain;
+                display: block;
+            }
+            #mobile-vid {
+                display: none;
             }
         }
 
+        /* In between Mobile and Desktops */
+        @media only screen and (max-width:1199px) and (min-width:551px) {
+            #desktop-vid {
+                display: block;
+            }
+            #mobile-vid {
+                display: none;
+            }
+        }
+
+        /* For Mobile */
         @media only screen and (max-width:550px) {
             .video-container {
                 height: 570px;
+            }
+
+            #desktop-vid {
+                display: none;
+            }
+
+            #mobile-vid {
+                display: block;
             }
         }
     </style>
@@ -49,7 +72,11 @@
 <body>
     <div>
         <div class="video-container">
-            <video id="vid" autoplay loop muted>
+            <video id="mobile-vid" autoplay loop muted playsinline>
+                <source src="mobile.mp4" type="video/mp4" />
+            </video>
+            <!-- We can add a 3rd source or N number of sources and conditionally show them based on screen sizes -->
+            <video id="desktop-vid" autoplay loop muted playsinline>
                 <source src="video.mp4" type="video/mp4" />
             </video>
         </div>
